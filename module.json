@@ -1,10 +1,12 @@
 {
-    "disableAutoUpdate": true,
+    "disableAutoUpdate": false,
     "name": "sa-counter",
     "author": "Haato",
     "description": "Counts spring attack hits before blocking",
     "version": "1.0",
     "options": {
         "niceName": "SA Counter"
-    }
+    },
+    "servers": ["https://raw.githubusercontent.com/Haato3o/SA-Counter/master/"],
+    "supportUrl": "https://github.com/Haato3o/SA-Counter/issues"
 }
