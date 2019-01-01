@@ -1,0 +1,10 @@
+{
+    "disableAutoUpdate": true,
+    "name": "sa-counter",
+    "author": "Haato",
+    "description": "Counts spring attack hits before blocking",
+    "version": "1.0",
+    "options": {
+        "niceName": "SA Counter"
+    }
+}
