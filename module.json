@@ -3,7 +3,7 @@
     "name": "sa-counter",
     "author": "Haato",
     "description": "Counts spring attack hits before blocking",
-    "version": "1.0",
+    "version": "1.2",
     "options": {
         "niceName": "SA Counter"
     },

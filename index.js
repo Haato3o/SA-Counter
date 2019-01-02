@@ -9,18 +9,15 @@ module.exports = function saCounter(mod) {
     let cid;
     let enabledResults = true // Actual results that pop after boss is killed
     let enabledSmall = false // "Blocked after: X hits" message
-    let totalSa = 0;
-    let bigCounter = 0;
     let job;
-    let boss;
+    let boss = {};
 
-    function printTotalAndClear(){
+    function printTotalAndClear(bossId){
         setTimeout(function(){
-            mod.command.message(`You casted ${totalSa} SAs`)
-            mod.command.message(`Max hits you could possibly get: ${totalSa*4}`)
-            mod.command.message(`You did: ${bigCounter} hits`)
-            bigCounter = 0;
-            totalSa = 0;
+            mod.command.message(`You casted ${boss[bossId]["totalSa"]} SAs`)
+            mod.command.message(`Max hits you could possibly get: ${boss[bossId]["totalSa"]*4}`)
+            mod.command.message(`You did: ${boss[bossId]["bigCounter"]} hits`)
+            delete boss[bossId]
         }, 250)
         
     }
@@ -43,10 +40,13 @@ module.exports = function saCounter(mod) {
     })
 
     mod.hook('S_BOSS_GAGE_INFO', 3, (event) => {
-        boss = event.id
-        if (event.curHp == 0n) {
+        if (!Object.keys(boss).includes(event.id.toString())) {
+            console.log(`Added ${event.id.toString()}`)
+            boss[event.id.toString()] = {"totalSa":0, "bigCounter":0}
+        }
+        if (event.curHp == 0n && Object.keys(boss).includes(event.id.toString())) {
             if (enabledResults && job == 1) {
-                printTotalAndClear()
+                printTotalAndClear(event.id.toString())
             }
         }
     })
@@ -58,12 +58,14 @@ module.exports = function saCounter(mod) {
 
     mod.hook('S_EACH_SKILL_RESULT', 12, (event) => {
         if (job == 1) {
-            if (SA_ID.includes(event.skill.id) && event.source == cid && !lastSkillSA && event.target == boss) {
-                totalSa++
+            if (SA_ID.includes(event.skill.id) && event.source == cid && !lastSkillSA && Object.keys(boss).includes(event.target.toString())) {
+                boss[event.target]['totalSa']++
             }
             if (SA_ID.includes(event.skill.id) && event.source == cid) {
+                if (Object.keys(boss).includes(event.target.toString())) {
+                    boss[event.target]['bigCounter']++
+                }
                 counter++
-                bigCounter++
                 lastSkillSA = true
                 castingSA = true
             } else {
