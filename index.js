@@ -29,10 +29,10 @@ module.exports = function saCounter(mod) {
             mod.command.message("block results -> Enables/Disables results after killing a boss")
         } else if (ext == 'sa') {
             enabledSmall = !enabledSmall
-            mod.command.message(`SA Counter is now ${enabled ? 'en' : 'dis'}abled.`)
+            mod.command.message(`SA Counter is now ${enabledSmall ? 'en' : 'dis'}abled.`)
         } else if (ext == 'results') {
             enabledResults = !enabledResults
-            mod.command.message(`SA Result is now ${enabled ? 'en' : 'dis'}abled.`)
+            mod.command.message(`SA Result is now ${enabledResults ? 'en' : 'dis'}abled.`)
         } else {
             mod.command.message("Command doesn't exist! Use 'block help' to see the available commands.")
         }
