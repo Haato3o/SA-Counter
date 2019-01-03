@@ -41,7 +41,6 @@ module.exports = function saCounter(mod) {
 
     mod.hook('S_BOSS_GAGE_INFO', 3, (event) => {
         if (!Object.keys(boss).includes(event.id.toString())) {
-            console.log(`Added ${event.id.toString()}`)
             boss[event.id.toString()] = {"totalSa":0, "bigCounter":0}
         }
         if (event.curHp == 0n && Object.keys(boss).includes(event.id.toString())) {
