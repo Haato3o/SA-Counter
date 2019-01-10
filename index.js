@@ -67,7 +67,7 @@ module.exports = function saCounter(mod) {
                 counter++
                 lastSkillSA = true
                 castingSA = true
-            } else {
+            } else if (!SA_ID.includes(event.skill.id) && event.source == cid) {
                 lastSkillSA = false
                 castingSA = false
                 counter = 0
@@ -85,6 +85,5 @@ module.exports = function saCounter(mod) {
                 lastSkillSA = false
             }
         }, 200)
-        
     })
 }
