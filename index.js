@@ -50,7 +50,7 @@ module.exports = function saCounter(mod) {
         }
     })
 
-    mod.hook('S_LOGIN', 12, (event) => {
+    mod.hook('S_LOGIN', 13, (event) => {
         cid = event.gameId
         job = (event.templateId - 10101) % 100
     })
